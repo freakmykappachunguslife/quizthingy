@@ -1,0 +1,21 @@
+section .text
+        global _start
+_start:
+
+mov eax,[a]
+mov dl,[b]
+mul dl
+mov ebx,eax
+
+mov eax,[c]
+mov dl,[d]
+mul dl
+add eax,ebx
+add [res],eax
+
+mov eax,1
+int 0x80
+
+segment .bss
+res resb 0
+
