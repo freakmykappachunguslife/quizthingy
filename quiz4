@@ -1,0 +1,52 @@
+
+section .text
+	global _start
+
+_start:
+
+mov ecx,[x]
+mov edx,[y]
+mov ebx,[z]
+
+call sum
+
+
+
+mov [res],eax
+
+   mov	ecx, msg	
+   mov	edx, len
+   mov	ebx, 1	        
+   mov	eax, 4	        
+     int 0x80
+
+    mov ecx,res
+    mov edx,1
+    mov ebx,1
+    mov eax,4
+    int 0x80
+
+   
+mov eax,1
+int 0x80
+
+sum:
+mov eax,ecx
+add eax,edx
+
+mov edx,ebx
+add eax,edx
+add eax,'0'
+
+ret
+
+section .data
+x DB 1
+y DB 2
+z DB 3
+msg DD "Sum: "
+len equ $- msg
+
+
+section .bss
+res resb 1
